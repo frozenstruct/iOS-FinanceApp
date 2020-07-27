@@ -70,6 +70,8 @@ class GRViewController: UIViewController, Observer {
                 .map({ $0.amount * -1})
                 ?? [0]
                 
+                print(self.lineGraphView.graphPoints)
+                
                 self.lineGraphView.setNeedsDisplay()
             case 2:
                 self.lineGraphView.bottomStackView.switchLabelsText(_case: 2, quantity: 4)
@@ -79,6 +81,8 @@ class GRViewController: UIViewController, Observer {
                 .filter({ $0.amount < 0 })
                 .map({ $0.amount * -1})
                 ?? [0]
+                
+                print(self.lineGraphView.graphPoints)
                 
                 self.lineGraphView.setNeedsDisplay()
             case 3:
