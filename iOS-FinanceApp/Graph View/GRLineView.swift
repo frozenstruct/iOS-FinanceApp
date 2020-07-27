@@ -68,8 +68,6 @@ class GRLineView: UIView {
                                    end: endPoint,
                                    options: .init(rawValue: 0))
         
-        
-        
         // MARK: - Graph Points
         let margin = Constants.margin
         

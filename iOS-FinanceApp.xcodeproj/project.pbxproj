@@ -27,7 +27,6 @@
 		3F477A1624C8E85B00011BE5 /* FO + TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F477A1524C8E85B00011BE5 /* FO + TableView.swift */; };
 		3F477A1824C8E87100011BE5 /* ED + TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F477A1724C8E87100011BE5 /* ED + TableView.swift */; };
 		3F477A1A24C8E88900011BE5 /* EI + TextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F477A1924C8E88900011BE5 /* EI + TextFields.swift */; };
-		3F477A1C24C8E8E100011BE5 /* GRTransmission2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F477A1B24C8E8E100011BE5 /* GRTransmission2.swift */; };
 		3F68407524AD2E9900C92611 /* GRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F68407224AD2E9900C92611 /* GRViewController.swift */; };
 		3F68407624AD2E9900C92611 /* GRLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F68407324AD2E9900C92611 /* GRLineView.swift */; };
 		3F68407724AD2E9900C92611 /* GRSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F68407424AD2E9900C92611 /* GRSegmentedControl.swift */; };
@@ -78,7 +77,6 @@
 		3F477A1524C8E85B00011BE5 /* FO + TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FO + TableView.swift"; sourceTree = "<group>"; };
 		3F477A1724C8E87100011BE5 /* ED + TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ED + TableView.swift"; sourceTree = "<group>"; };
 		3F477A1924C8E88900011BE5 /* EI + TextFields.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EI + TextFields.swift"; sourceTree = "<group>"; };
-		3F477A1B24C8E8E100011BE5 /* GRTransmission2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GRTransmission2.swift; path = "iOS-FinanceApp/Graph View/GRTransmission2.swift"; sourceTree = "<group>"; };
 		3F68407224AD2E9900C92611 /* GRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GRViewController.swift; path = "iOS-FinanceApp/Graph View/GRViewController.swift"; sourceTree = "<group>"; };
 		3F68407324AD2E9900C92611 /* GRLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GRLineView.swift; path = "iOS-FinanceApp/Graph View/GRLineView.swift"; sourceTree = "<group>"; };
 		3F68407424AD2E9900C92611 /* GRSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GRSegmentedControl.swift; path = "iOS-FinanceApp/Graph View/GRSegmentedControl.swift"; sourceTree = "<group>"; };
@@ -179,7 +177,6 @@
 				3F68407324AD2E9900C92611 /* GRLineView.swift */,
 				3F68407424AD2E9900C92611 /* GRSegmentedControl.swift */,
 				3F07FA2624B4F22F0045D96A /* GRStackView.swift */,
-				3F477A1B24C8E8E100011BE5 /* GRTransmission2.swift */,
 				3F68407224AD2E9900C92611 /* GRViewController.swift */,
 				3FE76B3624CE0B9D00E30FC2 /* GRTransmission.swift */,
 			);
@@ -436,7 +433,6 @@
 				3F15C5CC24AE5A360026E144 /* GLDate&Time.swift in Sources */,
 				3F477A1624C8E85B00011BE5 /* FO + TableView.swift in Sources */,
 				3F6AE09C24AA781C00EB228B /* EI + DatePicker.swift in Sources */,
-				3F477A1C24C8E8E100011BE5 /* GRTransmission2.swift in Sources */,
 				3F15C5CA24AE5A000026E144 /* BEDataManagement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

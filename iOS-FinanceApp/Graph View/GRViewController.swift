@@ -38,18 +38,9 @@ class GRViewController: UIViewController, Observer {
     }
     
     func receive(message: Transmittable) {
-        print(message.description)
+        print(message.matchedEntries)
         
         transmittedData = message
-        
-//        lineGraphView.totalLabel.text = "Total: \(message.totalForIncome)"
-//
-//        var index = 0
-//
-//        for label in [lineGraphView.maxLabel, lineGraphView.medLabel, lineGraphView.minLabel] {
-//            label.text = "\(message.incomeExtremums[index] )"
-//            index += 1
-//        }
     }
     
     func observe(segmentedControl: GRSegmentedControl) {
@@ -61,71 +52,47 @@ class GRViewController: UIViewController, Observer {
             case 0:
                 self.lineGraphView.bottomStackView.switchLabelsText(_case: 0, quantity: 6)
                 
-                self.lineGraphView.totalLabel.text = "Total: \(self.transmittedData?.totalForExpenses ?? 0)"
+                self.lineGraphView.graphPoints = self.transmittedData?.matchedEntries
+                    .sorted(by: { $0.hour < $1.hour })
+                    .filter({ $0.amount < 0 })
+                    .map({ $0.amount * -1})
+                    ?? [0]
                 
-                self.lineGraphView.maxLabel.text = "\(self.lineGraphView.graphPointsMaxValue / 1000)K"
-                self.lineGraphView.medLabel.text = "\(self.lineGraphView.graphPointsMaxValue / 2 / 1000)K"
-                self.lineGraphView.minLabel.text = "\(self.lineGraphView.graphPoints.min() ?? 0 / 1000)K"
-                
-                self.lineGraphView.graphPoints = self.transmittedData!.dailyExpenseData.map { $0.1 }
-                
-                print("\nGraph points values are: \(self.lineGraphView.graphPoints)")
-                print("\nGraph points max value is: \(self.lineGraphView.graphPointsMaxValue)")
+                print(self.lineGraphView.graphPoints)
                 
                 self.lineGraphView.setNeedsDisplay()
             case 1:
                 self.lineGraphView.bottomStackView.switchLabelsText(_case: 1, quantity: 7)
                 
-                self.lineGraphView.totalLabel.text = "Total: \(self.transmittedData?.totalForExpenses ?? 0)"
-                
-                self.lineGraphView.maxLabel.text = "\(self.lineGraphView.graphPointsMaxValue / 1000)K"
-                self.lineGraphView.medLabel.text = "\(self.lineGraphView.graphPointsMaxValue / 2 / 1000)K"
-                self.lineGraphView.minLabel.text = "\(self.lineGraphView.graphPoints.min() ?? 0 / 1000)K"
-                
-                self.lineGraphView.graphPoints = self.transmittedData!.weeklyExpenseData.map { $0.1 }
-                
-                print("\nGraph points values are: \(self.lineGraphView.graphPoints)")
-                print("\nGraph points max value is: \(self.lineGraphView.graphPointsMaxValue)")
+                self.lineGraphView.graphPoints = self.transmittedData?.matchedEntries
+                .sorted(by: { $0.weekDay < $1.weekDay })
+                .filter({ $0.amount < 0 })
+                .map({ $0.amount * -1})
+                ?? [0]
                 
                 self.lineGraphView.setNeedsDisplay()
             case 2:
                 self.lineGraphView.bottomStackView.switchLabelsText(_case: 2, quantity: 4)
                 
-               self.lineGraphView.totalLabel.text = "Total: \(self.transmittedData?.totalForExpenses ?? 0)"
-                
-                self.lineGraphView.maxLabel.text = "\(self.lineGraphView.graphPointsMaxValue / 1000)K"
-                self.lineGraphView.medLabel.text = "\(self.lineGraphView.graphPointsMaxValue / 2 / 1000)K"
-                self.lineGraphView.minLabel.text = "\(self.lineGraphView.graphPoints.min() ?? 0 / 1000)K"
-                
-                self.lineGraphView.graphPoints = self.transmittedData!.monthlyExpenseData.map { $0.1 }
-                
-                print("\nGraph points values are: \(self.lineGraphView.graphPoints)")
-                print("\nGraph points max value is: \(self.lineGraphView.graphPointsMaxValue)")
+                self.lineGraphView.graphPoints = self.transmittedData?.matchedEntries
+                .sorted(by: { $0.weekOfMonth < $1.weekOfMonth })
+                .filter({ $0.amount < 0 })
+                .map({ $0.amount * -1})
+                ?? [0]
                 
                 self.lineGraphView.setNeedsDisplay()
             case 3:
                 self.lineGraphView.bottomStackView.switchLabelsText(_case: 3, quantity: 4)
                 
-                self.lineGraphView.totalLabel.text = "Total: \(self.transmittedData?.totalForExpenses ?? 0)"
-                
-                self.lineGraphView.maxLabel.text = "\(self.lineGraphView.graphPointsMaxValue / 1000)K"
-                self.lineGraphView.medLabel.text = "\(self.lineGraphView.graphPointsMaxValue / 2 / 1000)K"
-                self.lineGraphView.minLabel.text = "\(self.lineGraphView.graphPoints.min() ?? 0 / 1000)K"
-                
-                self.lineGraphView.graphPoints = self.transmittedData!.yearlyExpenseData.map { $0.1 }
-                
-                print("\nGraph points values are: \(self.lineGraphView.graphPoints)")
-                print("\nGraph points max value is: \(self.lineGraphView.graphPointsMaxValue)")
+                self.lineGraphView.graphPoints = self.transmittedData?.matchedEntries
+                .sorted(by: { $0.quarter < $1.quarter })
+                .filter({ $0.amount < 0 })
+                .map({ $0.amount * -1})
+                ?? [0]
                 
                 self.lineGraphView.setNeedsDisplay()
             case 4:
                 
-                self.lineGraphView.totalLabel.text = "Total: \(self.transmittedData?.totalForExpenses ?? 0)"
-                
-                self.lineGraphView.graphPoints = entries.map({ $0.amount })
-                
-                print("\nGraph points values are: \(self.lineGraphView.graphPoints)")
-                print("\nGraph points max value is: \(self.lineGraphView.graphPointsMaxValue)")
                 
                 self.lineGraphView.setNeedsDisplay()
             default:
@@ -146,7 +113,7 @@ class GRViewController: UIViewController, Observer {
                     print("\nGRLineView is ready to plot a path with \(self.lineGraphView.graphPointsCount) points.")
                 case 7:
                     self.lineGraphView.graphPointsCount = 7
-                   
+                    
                     print("\nGRLineView is ready to plot a path with \(self.lineGraphView.graphPointsCount) points.")
                 case 4:
                     self.lineGraphView.graphPointsCount = 4

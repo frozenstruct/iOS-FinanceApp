@@ -9,13 +9,6 @@
 import Foundation
 import RealmSwift
 
-class GRTransmission {
-    static var shared: GRTransmission {
-        let instance = GRTransmission()
-        return instance
-    }
-    
-    private init() {}
-    
-    var entries = [Entry]()
+class GRTransmission: Transmittable {
+    var matchedEntries = [Entry]()
 }
