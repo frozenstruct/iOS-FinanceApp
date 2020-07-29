@@ -11,9 +11,13 @@ import RealmSwift
 
 class FOViewController: UIViewController {
     // MARK: - Properties and Outlets
+    @IBOutlet weak var currentBalanceTitle: UILabel!
+    
     @IBOutlet weak var pivotTableView: UITableView!
     
     @IBOutlet weak var currentBalanceLabel: UILabel!
+    
+    @IBOutlet weak var topStackView: UIStackView!
     
     var data: [Dictionary<String, Int>.Element] {
         get { return DataManager.mapCategories(from: entries) }
@@ -30,7 +34,10 @@ class FOViewController: UIViewController {
         super.viewDidLoad()
         
         refreshOverviewData()
+        
         observe()
+        
+        constrain()
         
         pivotTableView.delegate = self // DRY
         pivotTableView.dataSource = self // DRY
@@ -92,7 +99,7 @@ class FOViewController: UIViewController {
             selector: #selector(refreshOverviewData),
             name: .entryAddSuccess,
             object: nil)
-       
+        
         notificationCenter.addObserver(
             self,
             selector: #selector(refreshOverviewData),
@@ -105,4 +112,21 @@ class FOViewController: UIViewController {
             name: .entryAmendSuccess,
             object: nil)
     }
+    
+    // MARK: - Constraints
+    func constrain() {
+        currentBalanceLabel.translatesAutoresizingMaskIntoConstraints = false
+        currentBalanceTitle.translatesAutoresizingMaskIntoConstraints = false
+        topStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        currentBalanceTitle.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        currentBalanceTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40).isActive = true
+        
+        currentBalanceLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        currentBalanceLabel.topAnchor.constraint(equalTo: currentBalanceTitle.bottomAnchor, constant: 30).isActive = true
+        
+        topStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        topStackView.topAnchor.constraint(equalTo: currentBalanceLabel.bottomAnchor, constant: 30).isActive = true
+    }
+    
 }
