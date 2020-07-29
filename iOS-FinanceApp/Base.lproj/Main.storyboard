@@ -289,7 +289,7 @@
                         <color key="backgroundColor" red="0.95686274510000002" green="1" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Finance Overview" id="PQe-Ft-fkh"/>
+                    <navigationItem key="navigationItem" title="Overview" id="PQe-Ft-fkh"/>
                     <connections>
                         <outlet property="addEntryButton" destination="OSp-Wn-ScD" id="cAh-HO-cgy"/>
                         <outlet property="breakdownLabel" destination="u6S-hB-Xvm" id="vMe-ZZ-NXq"/>
@@ -322,7 +322,7 @@
                         <viewLayoutGuide key="safeArea" id="f3j-Fb-uZZ"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Graph" image="2.circle" catalog="system" selectedImage="2.circle" id="kPC-ZI-NtD"/>
-                    <navigationItem key="navigationItem" title="Graph View" id="ljV-Nj-QQW">
+                    <navigationItem key="navigationItem" title="Chart Report" id="ljV-Nj-QQW">
                         <barButtonItem key="backBarButtonItem" title="Overview" id="fTY-GA-C2z"/>
                     </navigationItem>
                 </viewController>
@@ -429,7 +429,7 @@
                         <viewLayoutGuide key="safeArea" id="jLP-Qd-4c9"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Expenses Details" image="3.circle" catalog="system" selectedImage="3.circle" id="NdC-Ly-ecU"/>
-                    <navigationItem key="navigationItem" title="Expenses Details" id="aJO-2J-FIr">
+                    <navigationItem key="navigationItem" title="All Transactions" id="aJO-2J-FIr">
                         <barButtonItem key="backBarButtonItem" title="Overview" id="YEA-wu-ywd"/>
                     </navigationItem>
                     <connections>
@@ -465,7 +465,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Jbo-YL-gWT"/>
+        <segue reference="Zq2-kj-oBE"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="1.circle" catalog="system" width="128" height="121"/>
