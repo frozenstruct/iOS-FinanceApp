@@ -9,10 +9,24 @@
 import Foundation
 
 extension EDViewController {
+    
     func observe() {
-        notificationCenter.addObserver(self, selector: #selector(reloadData), name: .entryAddSuccess, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(reloadData), name: .entryAmendSuccess, object: nil)
+        
+        notificationCenter
+            .addObserver(
+                self,
+                selector: #selector(reloadData),
+                name: .entryAddSuccess,
+                object: nil)
+        
+        notificationCenter
+            .addObserver(
+                self,
+                selector: #selector(reloadData),
+                name: .entryAmendSuccess,
+                object: nil)
     }
+    
     
     @objc func reloadData() {
         detailsTableView.reloadData()

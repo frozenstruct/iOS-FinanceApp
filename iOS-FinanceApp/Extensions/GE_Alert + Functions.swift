@@ -9,13 +9,17 @@
 import UIKit
 
 extension UIAlertController {
+    
     func categoryDidValidated(_ category: String) -> Bool {
         return category.count > 0
     }
     
+    
     @objc func submitButtonDidEnabled() {
+        
         if let categoryName = textFields?[0].text,
             let action = actions.last {
+            
             action.isEnabled = categoryDidValidated(categoryName)
         }
     }

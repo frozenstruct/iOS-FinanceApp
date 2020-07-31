@@ -15,6 +15,7 @@ import RealmSwift
  ~> '@objc' used instead (does the same thing but for the individual member of the class)
  */
 class Entry: Object {
+    
     // MARK: - Entry Persisted Properties
     /**
      'dynamic' engages the dynamic method dispatch to deal with the property (theory below)
@@ -52,20 +53,31 @@ class Entry: Object {
     
     @objc dynamic var hour: Int = 0
     
+    
     // MARK: - Custom Init to Add an Entry
     /**
      convenience init - secondary supporting initializer [SOMEHOW NOW THIS IS THE ONLY WAY TO INIT REALM INSTANCE ~> NEEDS CLARIFICATION]
      */
     convenience init(id: String,
+                     
                      name: String,
+                     
                      amount: Int,
+                     
                      date: Date,
+                     
                      category: String,
+                     
                      entryType: String?,
+                     
                      ToC: String,
+                     
                      weekDay: Int,
+                     
                      weekOfMonth: Int,
+                     
                      quarter: Int,
+                     
                      time: Int) {
         self.init()
         
@@ -77,9 +89,10 @@ class Entry: Object {
         
         self.date = date
         
-        self.strDate = Heplers.createDateFormatter(
-            dateStyle: .medium,
-            timeStyle: .none).string(from: date)
+        self.strDate = Helpers
+            .createDateFormatter(
+                dateStyle: .medium,
+                timeStyle: .none).string(from: date)
         
         self.category = category
         
@@ -96,8 +109,10 @@ class Entry: Object {
         self.hour = time
     }
     
+    
     // MARK: - Entry Description
     override var description: String {
+        
         get {
             return """
             \n\t- Entry description:
@@ -108,7 +123,7 @@ class Entry: Object {
             \t\t- type: \(entryType ?? "");
             \t\t- category: \(category ?? "");
             \t\t- ToC: \(creationStamp ?? "");
-            \t\t- weekday: \(weekDay ?? 0);
+            \t\t- weekday: \(weekDay);
             \t\t- week of month: \(weekOfMonth);
             \t\t- quarter: \(quarter).
             \t [END OF ENTRY DESCRIPTION]\n

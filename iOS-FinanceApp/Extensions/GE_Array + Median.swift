@@ -9,7 +9,9 @@
 import Foundation
 
 extension Array where Element == Int {
+    
     func median() -> Float {
+        
         guard !self.isEmpty else {
             return 0.00
         }

@@ -9,6 +9,7 @@
 import Foundation
 
 extension String {
+    
     var doesContainWhitespacesAndNewLines: Bool {
         return (self.rangeOfCharacter(from: .whitespacesAndNewlines) != nil)
     }

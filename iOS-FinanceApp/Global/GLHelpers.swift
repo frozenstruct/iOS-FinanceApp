@@ -10,65 +10,77 @@ import Foundation
 import RealmSwift
 
 // MARK: - Class for Repeated Methods
-final class Heplers {
+final class Helpers {
+    
     // MARK: - Formatters
     static func createDateFormatter(dateStyle: DateFormatter.Style, timeStyle: DateFormatter.Style, timeZone: TimeZone = .autoupdatingCurrent) -> DateFormatter {
+        
         let dateFormatter = DateFormatter()
         
         dateFormatter.dateStyle = dateStyle
+        
         dateFormatter.timeStyle = timeStyle
+        
         dateFormatter.timeZone = timeZone
         
         return dateFormatter
     }
     
+    
     static func createNumberFormatter(input number: Int) -> String {
+        
         let numberFormatter = NumberFormatter()
         
         numberFormatter.numberStyle = .decimal
+        
         numberFormatter.locale = Locale(identifier: "ru_RU")
         
         return numberFormatter.string(from: NSNumber(integerLiteral: number))!
     }
     
+    
     // MARK: - Alerts
-    static var alertData: [[String]] = [["Name is missing",
-                                         "Sorry, cannot proceed without a name. Please provide one. \n\nTips: use alphanumerics and (or) specials; length: 2 to 70 symbols."],
-                                        
-                                        ["Invalid entry name",
-                                         "Sorry, the name is invalid. Please retry. \n\nTips: use alphanumerics and (or) specials; length: 2 to 70 symbols."],
-                                        
-                                        ["Amount is missing",
-                                         "Sorry, cannot proceed without knowing the cost of the entry. Please provide one. \n\nTips: use numerics, arbitrary length."],
-                                        
-                                        ["Invalid amount",
-                                         "Sorry, the amount is invalid. Please retry. \n\nTips: use numerics, arbitrary length."],
-                                        
-                                        ["Date is missing",
-                                         "Sorry, cannot proceed without knowing when your entry was made. \n\nPlease provide the date."],
-                                        
-                                        ["Invalid date",
-                                         "Sorry, the date is invalid. Please retry. \n\nTips: use only date picker."],
-                                        
-                                        ["Category is missing",
-                                         "Sorry, cannot proceed without knowing the entry category. Please provide one. \n\nTips: use alphanumerics; arbitrary length."],
-                                        
-                                        ["Invalid Category",
-                                         "Sorry, the category is invalid. Please select some from picker or add new. \n\nTips: use alphanumerics, arbitrary length. Only picker data is accepted."],
-                                        
-                                        ["Type is missing",
-                                         "Sorry, cannot proceed without knowing whether the entry is an income or an expense. Please specify. \nTip: just type 'Income' or 'Expense', you do not need to put a negative sign."],
-                                        
-                                        ["Invalid Type",
-                                         "Sorry, the type is missing. Please retry. \n\nTip: just type 'Income' or 'Expense', you do not need to put a negative sign."],
-                                        
-                                        ["Enter category name",
-                                         "Please input some meaningful and descriptive name for your fresh category"],
-                                        
-                                        ["Category name cannot be empty!",
-                                         "Please consider adding some meaningful and descriptive name"]]
+    static var alertData: [[String]] = [
+        
+        ["Name is missing",
+         "Sorry, cannot proceed without a name. Please provide one. \n\nTips: use alphanumerics and (or) specials; length: 2 to 70 symbols."],
+        
+        ["Invalid entry name",
+         "Sorry, the name is invalid. Please retry. \n\nTips: use alphanumerics and (or) specials; length: 2 to 70 symbols."],
+        
+        ["Amount is missing",
+         "Sorry, cannot proceed without knowing the cost of the entry. Please provide one. \n\nTips: use numerics, arbitrary length."],
+        
+        ["Invalid amount",
+         "Sorry, the amount is invalid. Please retry. \n\nTips: use numerics, arbitrary length."],
+        
+        ["Date is missing",
+         "Sorry, cannot proceed without knowing when your entry was made. \n\nPlease provide the date."],
+        
+        ["Invalid date",
+         "Sorry, the date is invalid. Please retry. \n\nTips: use only date picker."],
+        
+        ["Category is missing",
+         "Sorry, cannot proceed without knowing the entry category. Please provide one. \n\nTips: use alphanumerics; arbitrary length."],
+        
+        ["Invalid Category",
+         "Sorry, the category is invalid. Please select some from picker or add new. \n\nTips: use alphanumerics, arbitrary length. Only picker data is accepted."],
+        
+        ["Type is missing",
+         "Sorry, cannot proceed without knowing whether the entry is an income or an expense. Please specify. \nTip: just type 'Income' or 'Expense', you do not need to put a negative sign."],
+        
+        ["Invalid Type",
+         "Sorry, the type is missing. Please retry. \n\nTip: just type 'Income' or 'Expense', you do not need to put a negative sign."],
+        
+        ["Enter category name",
+         "Please input some meaningful and descriptive name for your fresh category"],
+        
+        ["Category name cannot be empty!",
+         "Please consider adding some meaningful and descriptive name"]]
+    
     
     static func createAlertController(with title: String, message: String, and style: UIAlertController.Style) -> UIAlertController {
+        
         let alertController = UIAlertController(
             title: title,
             message: message,
@@ -89,6 +101,7 @@ final class Heplers {
     }
     
     static func createInputAlertController(with title: String, message: String, and style: UIAlertController.Style) -> UIAlertController {
+        
         let alertController = UIAlertController(
             title: title,
             message: message,
@@ -110,7 +123,9 @@ final class Heplers {
             style: .cancel,
             handler: nil)
         
+        
         alertController.addAction(cancelAction)
+        
         alertController.addAction(submitAction)
         
         alertController.addTextField {
@@ -121,6 +136,7 @@ final class Heplers {
                     alertController.submitButtonDidEnabled),
                 for: .editingChanged)
         }
+        
         return alertController
     }
 }

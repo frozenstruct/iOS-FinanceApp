@@ -12,28 +12,44 @@ final class GRTransmission: Transmittable {
     
     var matchedEntries: [Entry]
     
+    
     var incomeEntries: [Entry]
+    
     var expensesEntries: [Entry]
     
+    
     var income: [Int]
+    
     var expenses: [Int]
     
+    
     var totalForIncome: Int
+    
     var totalForExpenses: Int
     
+    
     var incomeExtremums: [Int]
+    
     var expensesExtremums: [Int]
     
+    
     var dailyIncomeData: [Dictionary<ClosedRange<Int>, Int>.Element]
+    
     var dailyExpenseData: [Dictionary<ClosedRange<Int>, Int>.Element]
     
+    
     var weeklyIncomeData: [Dictionary<Int, Int>.Element]
+    
     var weeklyExpenseData: [Dictionary<Int, Int>.Element]
     
+    
     var monthlyIncomeData: [Dictionary<Int, Int>.Element]
+    
     var monthlyExpenseData: [Dictionary<Int, Int>.Element]
     
+    
     var yearlyIncomeData: [Int : Int]
+    
     var yearlyExpenseData: [Int : Int]
     
     /// Initializes GRTransmission for daily entries render
@@ -48,50 +64,83 @@ final class GRTransmission: Transmittable {
     ///   - expensesExtremums: min / med / max for expenses
     ///   - dailyIncome: income amounts split by hours (see GRDataSource / GRStackView)
     ///   - dailyExpense: income amounts split by hours (see GRDataSource / GRStackView)
-    init(matchedEntries: [Entry],
-         incomeEntries: [Entry],
-         expensesEntries: [Entry],
-         income: [Int],
-         expenses: [Int],
-         totalIncome: Int,
-         totalExpenses: Int,
-         incomeExtremums: [Int],
-         expensesExtremums: [Int],
-         dailyIncome: [Dictionary<ClosedRange<Int>, Int>.Element],
-         dailyExpense: [Dictionary<ClosedRange<Int>, Int>.Element],
-         weeklyIncome: [Dictionary<Int, Int>.Element],
-         weeklyExpense: [Dictionary<Int, Int>.Element],
-         monthlyIncome: [Dictionary<Int, Int>.Element],
-         monthlyExpense: [Dictionary<Int, Int>.Element],
-         yearlyIncome: [Int : Int],
-         yearlyExpense: [Int : Int]) {
+    init(
+        matchedEntries: [Entry],
+        
+        incomeEntries: [Entry],
+        
+        expensesEntries: [Entry],
+        
+        income: [Int],
+        
+        expenses: [Int],
+        
+        totalIncome: Int,
+        
+        totalExpenses: Int,
+        
+        incomeExtremums: [Int],
+        
+        expensesExtremums: [Int],
+        
+        dailyIncome: [Dictionary<ClosedRange<Int>, Int>.Element],
+        
+        dailyExpense: [Dictionary<ClosedRange<Int>, Int>.Element],
+        
+        weeklyIncome: [Dictionary<Int, Int>.Element],
+        
+        weeklyExpense: [Dictionary<Int, Int>.Element],
+        
+        monthlyIncome: [Dictionary<Int, Int>.Element],
+        
+        monthlyExpense: [Dictionary<Int, Int>.Element],
+        
+        yearlyIncome: [Int : Int],
+        
+        yearlyExpense: [Int : Int]) {
         
         self.matchedEntries = matchedEntries
+        
         self.incomeEntries = incomeEntries
+        
         self.expensesEntries = expensesEntries
         
+        
         self.income = income
+        
         self.expenses = expenses
         
+        
         self.totalForIncome = totalIncome
+        
         self.totalForExpenses = totalExpenses
         
+        
         self.incomeExtremums = incomeExtremums
+        
         self.expensesExtremums = expensesExtremums
         
+        
         self.dailyIncomeData = dailyIncome
+        
         self.dailyExpenseData = dailyExpense
         
+        
         self.weeklyIncomeData = weeklyIncome
+        
         self.weeklyExpenseData = weeklyExpense
         
+        
         self.monthlyIncomeData = monthlyIncome
+        
         self.monthlyExpenseData = monthlyExpense
         
-        self.yearlyIncomeData = yearlyIncome
-        self.yearlyExpenseData = yearlyExpense
         
+        self.yearlyIncomeData = yearlyIncome
+        
+        self.yearlyExpenseData = yearlyExpense
     }
+    
     
     var description: String {
         get {
@@ -133,6 +182,7 @@ final class GRTransmission: Transmittable {
             \t\t- Yearly Expense Data \(yearlyExpenseData);
             """
         }
+        
         set {  }
     }
 }

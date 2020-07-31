@@ -9,5 +9,7 @@
 import RealmSwift
 
 var realm = try! Realm()
+
 var entries = realm.objects(Entry.self).sorted(byKeyPath: "date", ascending: false)
+
 var currentBalance: Int = realm.objects(Entry.self).sum(ofProperty: "amount")

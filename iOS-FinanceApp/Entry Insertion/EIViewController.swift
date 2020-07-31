@@ -9,8 +9,15 @@
 import UIKit
 
 class EIViewController: UIViewController {
+    
     // MARK: - Outlets
+    @IBOutlet weak var callToActionLabel: UILabel!
+    
+    @IBOutlet weak var topStackView: UIStackView!
+    
     @IBOutlet weak var imageForCategory: UIImageView!
+    
+    @IBOutlet weak var categoryIconPlaceholderLabel: UILabel!
     
     @IBOutlet weak var nameInputTextField: UITextField!
     
@@ -21,6 +28,11 @@ class EIViewController: UIViewController {
     @IBOutlet weak var categoryInputTextField: UITextField!
     
     @IBOutlet weak var typeControl: UISegmentedControl!
+    
+    @IBOutlet weak var addEntryButton: UIButton!
+    
+    @IBOutlet weak var addCategoryButton: UIButton!
+    
     
     // MARK: - Programmatic Properties
     var datePicker = UIDatePicker()
@@ -35,13 +47,18 @@ class EIViewController: UIViewController {
     
     var pickerData: [String] {
         get {
-            let uniques = Array(Set(realm.objects(Category.self).value(forKeyPath: "name") as! Array<String>))
+            let uniques = Array(Set(
+                realm
+                    .objects(Category.self)
+                    .value(forKeyPath: "name") as! Array<String>))
+            
             return uniques.sorted(by: <)
         }
     }
     
+    
     // MARK: - Add Entry Logic
-    @IBAction func addEntryButton(_ sender: UIButton) {
+    @IBAction func addEntryAction(_ sender: UIButton) {
         do {
             print("Now starting validation of user input")
             
@@ -57,17 +74,21 @@ class EIViewController: UIViewController {
                     
                     if typeControl.selectedSegmentIndex == 1 {
                         print("System is about to write expense. Now adjusting entry amount...")
+                        
                         entryToWrite.amount = Int(amntInputTextField.text!)! * -1
                     } else {
                         entryToWrite.amount = Int(amntInputTextField.text!)!
                     }
                     
-                    entryToWrite.date = Heplers.createDateFormatter(
+                    
+                    entryToWrite.date = Helpers.createDateFormatter(
                         dateStyle:
                         .medium, timeStyle:
                         .none)
                         .date(from: dateInputTextField.text!)!
+                    
                     entryToWrite.category = categoryInputTextField.text!
+                    
                     switch typeControl.selectedSegmentIndex {
                     case 0:
                         entryToWrite.entryType = "Income"
@@ -76,12 +97,16 @@ class EIViewController: UIViewController {
                     default: break
                     }
                     
-                    notificationCenter.post(name: .entryAmendSuccess, object: nil)
+                    notificationCenter.post(
+                        name: .entryAmendSuccess,
+                        object: nil)
                     
                     print("Entry data updated.")
                 }
                 
-                self.dismiss(animated: true, completion: flushTextFields)
+                self.dismiss(
+                    animated: true,
+                    completion: flushTextFields)
                 
                 print("Now finished amending process.")
             } else {
@@ -90,6 +115,7 @@ class EIViewController: UIViewController {
                 var type: String {
                     // make separate func
                     var result: String = ""
+                    
                     switch typeControl.selectedSegmentIndex {
                     case 0:
                         result = "Income"
@@ -98,29 +124,61 @@ class EIViewController: UIViewController {
                     default:
                         break
                     }
+                    
                     return result
                 }
                 
+                
                 let entry = Entry(
                     id: DataManager.generateId(),
+                    
                     name: nameInputTextField.text!,
+                    
                     amount: Int(amntInputTextField.text!)!,
-                    date: Heplers.createDateFormatter(
-                    dateStyle: .medium,
-                    timeStyle: .none)
-                    .date(from: dateInputTextField.text!)!,
+                    
+                    date: Helpers
+                        .createDateFormatter(
+                            dateStyle: .medium,
+                            timeStyle: .none)
+                        .date(from: dateInputTextField.text!)!,
+                    
                     category: categoryInputTextField.text!,
+                    
                     entryType: type,
+                    
                     ToC: "\(NSDate().timeIntervalSince1970)",
-                    weekDay: Calendar.current.component(.weekday, from: Date()),
-                    weekOfMonth: Calendar.current.component(.weekOfMonth, from: Date()),
-                    quarter: Calendar.current.component(.quarter, from: Date()),
-                    time: Calendar.current.component(.hour, from: Date()))
+                    
+                    weekDay: Calendar
+                        .current
+                        .component(
+                            .weekday,
+                            from: Date()),
+                    
+                    weekOfMonth: Calendar
+                        .current
+                        .component(
+                            .weekOfMonth,
+                            from: Date()),
+                    
+                    quarter: Calendar
+                        .current
+                        .component(
+                            .quarter,
+                            from: Date()),
+                    
+                    time: Calendar
+                        .current
+                        .component(
+                            .hour,
+                            from: Date()))
+                
                 
                 switch typeControl.selectedSegmentIndex {
                 case 1:
                     print("Expense detected! Now adjusting amount...")
+                    
                     entry.amount *= -1
+                    
                     controllerDidWriteAndDismiss(input: entry)
                 default:
                     controllerDidWriteAndDismiss(input: entry)
@@ -129,33 +187,58 @@ class EIViewController: UIViewController {
             }
         } catch {
             print("Error: \(error)")
-            
         }
     }
     
+    
     // MARK: - Add Category Logic
-    @IBAction func addCategory(_ sender: Any) {
-        let alert = Heplers.createInputAlertController(with: Heplers.alertData[10][0], message: Heplers.alertData[10][1], and: .alert)
-        self.present(alert, animated: true, completion: nil)
+    @IBAction func addCategoryAction(_ sender: Any) {
+        
+        let alert = Helpers
+            .createInputAlertController(
+                with: Helpers.alertData[10][0],
+                message: Helpers.alertData[10][1],
+                and: .alert)
+        
+        self.present(
+            alert,
+            animated: true,
+            completion: nil)
+        
         alert.actions[1].isEnabled = false
     }
     
+    
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
         constrain()
+        
         hideKeyboardWhenTappedAround()
+        
         createDatePicker()
+        
         createDatePickerToolbar()
+        
         createCategoryPicker()
+        
         dateInputTextField.inputView = datePicker
+        
         dateInputTextField.inputAccessoryView = toolBar
         
+        
         if let newData = incomingData {
+            
             nameInputTextField.text = newData.name
+            
             amntInputTextField.text = "\(abs(newData.amount))"
-            dateInputTextField.text = "\(Heplers.createDateFormatter(dateStyle: .medium, timeStyle: .none).string(from: newData.date!))"
+            
+            dateInputTextField.text = "\(Helpers.createDateFormatter(dateStyle: .medium, timeStyle: .none).string(from: newData.date!))"
+            
             categoryInputTextField.text = newData.category
+            
             
             switch newData.entryType {
             case "Income":
@@ -167,22 +250,31 @@ class EIViewController: UIViewController {
         }
     }
     
+    
     override func viewWillDisappear(_ animated: Bool) {
+        
         super.viewWillDisappear(animated)
+        
         flushTextFields()
     }
     
+    
     // MARK: - Date Picker & Toolbar Stuff
     func createDatePicker() {
+        
         datePicker.datePickerMode = .date
+        
         datePicker.addTarget(
             self,
             action: #selector(datePickerValueChanged(for:)),
             for: .valueChanged)
+        
         datePicker.backgroundColor = .white
     }
     
+    
     func createDatePickerToolbar() {
+        
         toolBar = UIToolbar()
         
         let todayButton = UIBarButtonItem(
@@ -213,7 +305,9 @@ class EIViewController: UIViewController {
         toolBar.sizeToFit()
     }
     
+    
     func constrain() {
+        
         let safeArea = view.safeAreaLayoutGuide
         
         callToActionLabel

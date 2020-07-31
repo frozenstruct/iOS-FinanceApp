@@ -16,45 +16,75 @@ final /* 'final' increases performance as static diapatch comes in*/ class DataM
      'keypath' accessor obtains any instance property as a separate value; in this case (see method signature) it provides read-only access to the property "amount" (Entry/ Amount)
      */
     static func search(searchTerm: String? = nil) -> Results<Entry> {
+        
         return realm.objects(Entry.self)
-            .filter("category contains [c] %@", searchTerm ?? "")
-            .sorted(byKeyPath: "amount", ascending: false)
+            .filter("category contains [c] %@",
+                    searchTerm ?? "")
+            .sorted(byKeyPath: "amount",
+                    ascending: false)
     }
     
+    
     static func createEntry(_ input: Object) {
+        
         realm.beginWrite()
+        
         realm.add(input)
         
+        
         do { try realm.commitWrite() }
+            
         catch { print(error) }
+        
         
         switch input {
         case is Entry:
-            notificationCenter.post(name: .entryAddSuccess, object: nil)
+            
+            notificationCenter.post(
+                name: .entryAddSuccess,
+                object: nil)
+            
         case is Category:
-            notificationCenter.post(name: .categoryAddSuccess, object: nil)
+            
+            notificationCenter.post(
+                name: .categoryAddSuccess,
+                object: nil)
+            
         default:
             print("Somehow you managed to break it, congrats!")
         }
     }
     
+    
     static func deleteEntry(_ input: Entry) {
+        
         realm.beginWrite()
+        
         realm.delete(input)
         
+        
         do { try realm.commitWrite() }
+            
         catch { print(error) }
         
-        notificationCenter.post(name: .entryRemoveSuccess, object: nil)
+        
+        notificationCenter.post(
+            name: .entryRemoveSuccess,
+            object: nil)
     }
+    
     
     // MARK: - Migration Tools
     static func showSchemaVersion() -> UInt64 {
+        
         let schemaVersionCheck = Realm.Configuration()
+        
         var version: UInt64 = 0
+        
         
         do {
             version = try schemaVersionAtURL(schemaVersionCheck.fileURL!) as UInt64
+            
             print("Schema version: \(version).")
         } catch {
             print(error)
@@ -62,12 +92,19 @@ final /* 'final' increases performance as static diapatch comes in*/ class DataM
         return version
     }
     
+    
     static func migratePersistentStorage(schema version: @escaping () -> UInt64 = showSchemaVersion) {
-        let config = Realm.Configuration(schemaVersion: version(), migrationBlock: { migration, oldSchemaVersion in
-            if oldSchemaVersion < version() {  }
+        
+        let config = Realm.Configuration(
+            schemaVersion: version(),
+            migrationBlock: { migration, oldSchemaVersion in
+                if oldSchemaVersion < version() {  }
         })
+        
+        
         Realm.Configuration.defaultConfiguration = config
     }
+    
     
     // MARK: - Helpers for View and Data
     /**
@@ -79,8 +116,11 @@ final /* 'final' increases performance as static diapatch comes in*/ class DataM
      - if the category already exist – the algorithm adds the matched category's value to the total
      */
     static func mapCategories(from data: Results<Entry>) -> [Dictionary<String, Int>.Element] {
+        
         let rawData = Array(data)
+        
         var dict: [String:Int] = [:]
+        
         
         rawData.forEach {
             /**
@@ -92,8 +132,10 @@ final /* 'final' increases performance as static diapatch comes in*/ class DataM
                 dict[$0.category!] = $0.amount
             }
         }
+        
         return dict.sorted { $0.value < $1.value }
     }
+    
     
     static func generateId() -> String {
         return UUID().uuidString

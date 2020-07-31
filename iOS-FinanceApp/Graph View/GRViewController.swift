@@ -10,6 +10,7 @@ import UIKit
 import RealmSwift
 
 class GRViewController: UIViewController, Observer {
+    
     let segmentedControl = GRSegmentedControl()
     
     let lineGraphView = GRLineView()
@@ -22,40 +23,51 @@ class GRViewController: UIViewController, Observer {
     
     var kvoTokenGRStackView: NSKeyValueObservation?
     
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
+        
         view.addSubview(segmentedControl)
+        
         view.addSubview(lineGraphView)
+        
         view.addSubview(entryTypeToggle)
         
-        lineGraphView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 20).isActive = true
-        entryTypeToggle.topAnchor.constraint(equalTo: lineGraphView.bottomAnchor, constant: 20).isActive = true
+        
+        lineGraphView.topAnchor.constraint(
+            equalTo: segmentedControl.bottomAnchor,
+            constant: 20)
+            .isActive = true
+        
+        entryTypeToggle.topAnchor.constraint(
+            equalTo: lineGraphView.bottomAnchor,
+            constant: 20)
+            .isActive = true
+        
         
         observe(segmentedControl: segmentedControl)
+        
         
         Publisher.add(observer: self)
     }
     
+    
     func receive(message: Transmittable) {
+        
         print(message.description)
         
         transmittedData = message
-        
-//        lineGraphView.totalLabel.text = "Total: \(message.totalForIncome)"
-//
-//        var index = 0
-//
-//        for label in [lineGraphView.maxLabel, lineGraphView.medLabel, lineGraphView.minLabel] {
-//            label.text = "\(message.incomeExtremums[index] )"
-//            index += 1
-//        }
     }
     
+    
     func observe(segmentedControl: GRSegmentedControl) {
+        
         kvoTokenSegmentedControl = segmentedControl.observe(\.segIndex, options: [.old, .new]) { (segmentedControl, change) in
             guard let segIndexNew = change.newValue, let segIndexOld = change.oldValue else { return }
             print("\nGRViewController is now aware that GRSegmentedControl is now at \(segIndexNew) index (was \(segIndexOld)).\n")
+            
             
             switch segIndexNew {
             case 0:

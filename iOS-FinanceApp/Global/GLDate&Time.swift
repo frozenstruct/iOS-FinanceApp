@@ -9,10 +9,13 @@
 import Foundation
 
 enum TimeFrame {
+    
     case day, week, month, year, all
 }
 
+
 struct DateConstants {
+    
     static var today: Date {
         get {
             Calendar.current.date(from: Calendar.current.dateComponents([.year, .month, .day], from: Date()))!

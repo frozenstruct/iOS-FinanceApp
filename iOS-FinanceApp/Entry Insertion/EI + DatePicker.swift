@@ -10,26 +10,33 @@ import Foundation
 import UIKit
 
 extension EIViewController {
+    
     @objc func datePickerValueChanged(for datePicker: UIDatePicker) {
-        dateInputTextField.text = Heplers.createDateFormatter(
+        dateInputTextField.text = Helpers.createDateFormatter(
             dateStyle: .medium,
             timeStyle: .none).string(from: datePicker.date)
     }
     
+    
     @objc func todayButtonPressed(sender: UIBarButtonItem) {
-        dateInputTextField.text = Heplers.createDateFormatter(
+        dateInputTextField.text = Helpers.createDateFormatter(
             dateStyle: .medium,
             timeStyle: .none).string(from: Date())
         
         dateInputTextField.resignFirstResponder()
     }
     
+    
     @objc func doneButtonPressed(sender: UIBarButtonItem) {
         dateInputTextField.resignFirstResponder()
     }
     
+    
     func controllerDidWriteAndDismiss(input: Entry) {
         DataManager.createEntry(input)
-        self.dismiss(animated: true, completion: flushTextFields)
+        
+        self.dismiss(
+            animated: true,
+            completion: flushTextFields)
     }
 }

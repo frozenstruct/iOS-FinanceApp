@@ -16,13 +16,19 @@ class EDTableViewCell: UITableViewCell {
     
     @IBOutlet weak var dateLabel: UILabel!
     
+    
     func updateDetailsCell(with data: Entry) {
+        
         nameLabel.text = data.name
-        amountLabel.text = "\(Heplers.createNumberFormatter(input: data.amount))"
+        
+        amountLabel.text = "\(Helpers.createNumberFormatter(input: data.amount))"
+        
         categoryLabel.text = data.category
-        dateLabel.text = Heplers.createDateFormatter(
-            dateStyle: .medium,
-            timeStyle: .none)
+        
+        dateLabel.text = Helpers
+            .createDateFormatter(
+                dateStyle: .medium,
+                timeStyle: .none)
             .string(from: data.date!)
     }
 }
