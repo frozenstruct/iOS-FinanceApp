@@ -18,6 +18,8 @@ class GREntryTypeToggle: UISegmentedControl {
         
         setup(input: items)
         
+        selectedSegmentIndex = 1
+        
         constrain()
     }
     
