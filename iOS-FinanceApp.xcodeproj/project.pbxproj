@@ -41,6 +41,7 @@
 		3F75562524B24C8B0095897F /* OBPublisher + Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F75562424B24C8B0095897F /* OBPublisher + Operators.swift */; };
 		3F838F6824A9BF3900EA1CFB /* ED + Observers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F838F6724A9BF3900EA1CFB /* ED + Observers.swift */; };
 		3F87C41324CF656500533C22 /* GRLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87C41224CF656400533C22 /* GRLineView.swift */; };
+		3FAEA60424D745EA001EE86E /* EI + Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAEA60324D745EA001EE86E /* EI + Constraints.swift */; };
 		3FBFDE13241ECEE1006DAC7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFDE12241ECEE1006DAC7A /* AppDelegate.swift */; };
 		3FBFDE15241ECEE1006DAC7A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFDE14241ECEE1006DAC7A /* SceneDelegate.swift */; };
 		3FBFDE17241ECEE1006DAC7A /* FOViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFDE16241ECEE1006DAC7A /* FOViewController.swift */; };
@@ -91,6 +92,7 @@
 		3F75562424B24C8B0095897F /* OBPublisher + Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OBPublisher + Operators.swift"; sourceTree = "<group>"; };
 		3F838F6724A9BF3900EA1CFB /* ED + Observers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ED + Observers.swift"; sourceTree = "<group>"; };
 		3F87C41224CF656400533C22 /* GRLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GRLineView.swift; path = "iOS-FinanceApp/Graph View/GRLineView.swift"; sourceTree = "<group>"; };
+		3FAEA60324D745EA001EE86E /* EI + Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EI + Constraints.swift"; sourceTree = "<group>"; };
 		3FBFDE0F241ECEE0006DAC7A /* iOS-FinanceApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-FinanceApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FBFDE12241ECEE1006DAC7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FBFDE14241ECEE1006DAC7A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -236,9 +238,10 @@
 		3FBFDE38241ED1D9006DAC7A /* Entry Insertion */ = {
 			isa = PBXGroup;
 			children = (
-				3F477A1924C8E88900011BE5 /* EI + TextFields.swift */,
+				3FAEA60324D745EA001EE86E /* EI + Constraints.swift */,
 				3F6AE09B24AA781C00EB228B /* EI + DatePicker.swift */,
 				8F4982C824AA386E00BD2B01 /* EI + Picker.swift */,
+				3F477A1924C8E88900011BE5 /* EI + TextFields.swift */,
 				3F6AE09D24AA78BD00EB228B /* EI + Validation.swift */,
 				B746C6E42445E0CC0004BD75 /* EIViewController.swift */,
 			);
@@ -401,6 +404,7 @@
 				3F75562524B24C8B0095897F /* OBPublisher + Operators.swift in Sources */,
 				3F15C5C624AE594B0026E144 /* BEEntry.swift in Sources */,
 				05EAED7C24BE05F000F14680 /* GE_SegmentedControl.swift in Sources */,
+				3FAEA60424D745EA001EE86E /* EI + Constraints.swift in Sources */,
 				3FBFDE13241ECEE1006DAC7A /* AppDelegate.swift in Sources */,
 				3F75561924B2409D0095897F /* OBObserver.swift in Sources */,
 				3FBFDE35241ED1A7006DAC7A /* EDViewController.swift in Sources */,
