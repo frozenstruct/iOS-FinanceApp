@@ -11,53 +11,83 @@ import UIKit
 class EIViewController: UIViewController {
     
     // MARK: - Outlets
-    @IBOutlet weak var callToActionLabel: UILabel!
     
+    @IBOutlet weak var callToActionLabel: UILabel!
     @IBOutlet weak var topStackView: UIStackView!
     
-    @IBOutlet weak var imageForCategory: UIImageView!
-    
-    @IBOutlet weak var categoryIconPlaceholderLabel: UILabel!
-    
     @IBOutlet weak var nameInputTextField: UITextField!
-    
     @IBOutlet weak var amntInputTextField: UITextField!
-    
     @IBOutlet weak var dateInputTextField: UITextField!
-    
     @IBOutlet weak var categoryInputTextField: UITextField!
-    
     @IBOutlet weak var typeControl: UISegmentedControl!
     
-    @IBOutlet weak var addEntryButton: UIButton!
+    @IBOutlet weak var imageForCategory: UIImageView!
+    @IBOutlet weak var categoryIconPlaceholderLabel: UILabel!
     
+    @IBOutlet weak var addEntryButton: UIButton!
     @IBOutlet weak var addCategoryButton: UIButton!
     
-    
     // MARK: - Programmatic Properties
-    var datePicker = UIDatePicker()
     
+    var datePicker = UIDatePicker()
     var categoryPicker  = UIPickerView()
     
     var toolBar = UIToolbar()
     
     var incomingData: Entry? = nil
-    
-    let notificationCenter = NotificationCenter.default
-    
     var pickerData: [String] {
         get {
             let uniques = Array(Set(
                 realm
                     .objects(Category.self)
-                    .value(forKeyPath: "name") as! Array<String>))
-            
+                    .value(forKeyPath: "name") as! Array<String>)
+            )
             return uniques.sorted(by: <)
         }
     }
     
+    let notificationCenter = NotificationCenter.default
+    
+    // MARK: - Lifecycle Methods
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        constrain()
+        
+        hideKeyboardWhenTappedAround()
+        
+        createDatePicker()
+        createDatePickerToolbar()
+        createCategoryPicker()
+        
+        dateInputTextField.inputView = datePicker
+        dateInputTextField.inputAccessoryView = toolBar
+        
+        if let newData = incomingData {
+            nameInputTextField.text = newData.name
+            amntInputTextField.text = "\(abs(newData.amount))"
+            dateInputTextField.text = "\(Helpers.createDateFormatter(dateStyle: .medium, timeStyle: .none).string(from: newData.date!))"
+            categoryInputTextField.text = newData.category
+            
+            switch newData.entryType {
+            case "Income":
+                typeControl.selectedSegmentIndex = 0
+            case "Expense":
+                typeControl.selectedSegmentIndex = 1
+            default: break
+            }
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        flushTextFields()
+    }
     
     // MARK: - Add Entry Logic
+    
     @IBAction func addEntryAction(_ sender: UIButton) {
         do {
             print("Now starting validation of user input")
@@ -80,7 +110,6 @@ class EIViewController: UIViewController {
                         entryToWrite.amount = Int(amntInputTextField.text!)!
                     }
                     
-                    
                     entryToWrite.date = Helpers.createDateFormatter(
                         dateStyle:
                         .medium, timeStyle:
@@ -99,14 +128,16 @@ class EIViewController: UIViewController {
                     
                     notificationCenter.post(
                         name: .entryAmendSuccess,
-                        object: nil)
+                        object: nil
+                    )
                     
                     print("Entry data updated.")
                 }
                 
                 self.dismiss(
                     animated: true,
-                    completion: flushTextFields)
+                    completion: flushTextFields
+                )
                 
                 print("Now finished amending process.")
             } else {
@@ -124,54 +155,49 @@ class EIViewController: UIViewController {
                     default:
                         break
                     }
-                    
                     return result
                 }
-                
                 
                 let entry = Entry(
                     id: DataManager.generateId(),
                     
                     name: nameInputTextField.text!,
-                    
                     amount: Int(amntInputTextField.text!)!,
-                    
                     date: Helpers
                         .createDateFormatter(
                             dateStyle: .medium,
-                            timeStyle: .none)
+                            timeStyle: .none
+                    )
                         .date(from: dateInputTextField.text!)!,
                     
                     category: categoryInputTextField.text!,
-                    
                     entryType: type,
                     
                     ToC: "\(NSDate().timeIntervalSince1970)",
-                    
                     weekDay: Calendar
                         .current
                         .component(
                             .weekday,
-                            from: Date()),
-                    
+                            from: Date()
+                    ),
                     weekOfMonth: Calendar
                         .current
                         .component(
                             .weekOfMonth,
-                            from: Date()),
-                    
+                            from: Date()
+                    ),
                     quarter: Calendar
                         .current
                         .component(
                             .quarter,
-                            from: Date()),
-                    
+                            from: Date()
+                    ),
                     time: Calendar
                         .current
                         .component(
                             .hour,
-                            from: Date()))
-                
+                            from: Date())
+                )
                 
                 switch typeControl.selectedSegmentIndex {
                 case 1:
@@ -183,6 +209,7 @@ class EIViewController: UIViewController {
                 default:
                     controllerDidWriteAndDismiss(input: entry)
                 }
+                
                 print("Now finished writing new entry.")
             }
         } catch {
@@ -190,71 +217,23 @@ class EIViewController: UIViewController {
         }
     }
     
-    
     // MARK: - Add Category Logic
+    
     @IBAction func addCategoryAction(_ sender: Any) {
-        
         let alert = Helpers
             .createInputAlertController(
                 with: Helpers.alertData[10][0],
                 message: Helpers.alertData[10][1],
-                and: .alert)
+                and: .alert
+        )
         
         self.present(
             alert,
             animated: true,
-            completion: nil)
+            completion: nil
+        )
         
         alert.actions[1].isEnabled = false
     }
     
-    
-    // MARK: - Lifecycle Methods
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        
-        constrain()
-        
-        hideKeyboardWhenTappedAround()
-        
-        createDatePicker()
-        
-        createDatePickerToolbar()
-        
-        createCategoryPicker()
-        
-        dateInputTextField.inputView = datePicker
-        
-        dateInputTextField.inputAccessoryView = toolBar
-        
-        
-        if let newData = incomingData {
-            
-            nameInputTextField.text = newData.name
-            
-            amntInputTextField.text = "\(abs(newData.amount))"
-            
-            dateInputTextField.text = "\(Helpers.createDateFormatter(dateStyle: .medium, timeStyle: .none).string(from: newData.date!))"
-            
-            categoryInputTextField.text = newData.category
-            
-            
-            switch newData.entryType {
-            case "Income":
-                typeControl.selectedSegmentIndex = 0
-            case "Expense":
-                typeControl.selectedSegmentIndex = 1
-            default: break
-            }
-        }
-    }
-    
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        
-        super.viewWillDisappear(animated)
-        
-        flushTextFields()
-    }
 }

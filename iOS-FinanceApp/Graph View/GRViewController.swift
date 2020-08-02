@@ -20,21 +20,14 @@ class GRViewController: UIViewController, Observer {
     var transmittedData: Transmittable? = nil
     
     var kvoTokenSegmentedControl: NSKeyValueObservation?
-    
     var kvoTokenGRStackView: NSKeyValueObservation?
     
-    
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
-        
         view.addSubview(segmentedControl)
-        
         view.addSubview(lineGraphView)
-        
         view.addSubview(entryTypeToggle)
-        
         
         lineGraphView.topAnchor.constraint(
             equalTo: segmentedControl.bottomAnchor,
@@ -46,28 +39,21 @@ class GRViewController: UIViewController, Observer {
             constant: 20)
             .isActive = true
         
-        
         observe(segmentedControl: segmentedControl)
-        
         
         Publisher.add(observer: self)
     }
     
-    
     func receive(message: Transmittable) {
-        
         print(message.description)
         
         transmittedData = message
     }
     
-    
     func observe(segmentedControl: GRSegmentedControl) {
-        
         kvoTokenSegmentedControl = segmentedControl.observe(\.segIndex, options: [.old, .new]) { (segmentedControl, change) in
             guard let segIndexNew = change.newValue, let segIndexOld = change.oldValue else { return }
             print("\nGRViewController is now aware that GRSegmentedControl is now at \(segIndexNew) index (was \(segIndexOld)).\n")
-            
             
             switch segIndexNew {
             case 0:
@@ -102,7 +88,7 @@ class GRViewController: UIViewController, Observer {
             case 2:
                 self.lineGraphView.bottomStackView.switchLabelsText(_case: 2, quantity: 4)
                 
-               self.lineGraphView.totalLabel.text = "Total: \(self.transmittedData?.totalForExpenses ?? 0)"
+                self.lineGraphView.totalLabel.text = "Total: \(self.transmittedData?.totalForExpenses ?? 0)"
                 
                 self.lineGraphView.maxLabel.text = "\(self.lineGraphView.graphPointsMaxValue / 1000)K"
                 self.lineGraphView.medLabel.text = "\(self.lineGraphView.graphPointsMaxValue / 2 / 1000)K"
@@ -128,7 +114,6 @@ class GRViewController: UIViewController, Observer {
                 print("\nGraph points max value is: \(self.lineGraphView.graphPointsMaxValue)")
                 self.lineGraphView.setNeedsDisplay()
             case 4:
-                
                 self.lineGraphView.totalLabel.text = "Total: \(self.transmittedData?.totalForExpenses ?? 0)"
                 
                 self.lineGraphView.graphPoints = entries.map({ $0.amount })
@@ -154,7 +139,7 @@ class GRViewController: UIViewController, Observer {
                     print("\nGRLineView is ready to plot a path with \(self.lineGraphView.graphPointsCount) points.")
                 case 7:
                     self.lineGraphView.graphPointsCount = 7
-                   
+                    
                     print("\nGRLineView is ready to plot a path with \(self.lineGraphView.graphPointsCount) points.")
                 case 4:
                     self.lineGraphView.graphPointsCount = 4
@@ -177,4 +162,5 @@ class GRViewController: UIViewController, Observer {
         default: break
         }
     }
+    
 }

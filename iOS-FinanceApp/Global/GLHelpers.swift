@@ -9,39 +9,37 @@
 import Foundation
 import RealmSwift
 
-// MARK: - Class for Repeated Methods
 final class Helpers {
     
     // MARK: - Formatters
-    static func createDateFormatter(dateStyle: DateFormatter.Style, timeStyle: DateFormatter.Style, timeZone: TimeZone = .autoupdatingCurrent) -> DateFormatter {
-        
+    
+    static func createDateFormatter(
+        dateStyle: DateFormatter.Style,
+        timeStyle: DateFormatter.Style,
+        timeZone: TimeZone = .autoupdatingCurrent
+    ) -> DateFormatter
+    {
         let dateFormatter = DateFormatter()
         
         dateFormatter.dateStyle = dateStyle
-        
         dateFormatter.timeStyle = timeStyle
-        
         dateFormatter.timeZone = timeZone
         
         return dateFormatter
     }
     
-    
     static func createNumberFormatter(input number: Int) -> String {
-        
         let numberFormatter = NumberFormatter()
         
         numberFormatter.numberStyle = .decimal
-        
         numberFormatter.locale = Locale(identifier: "ru_RU")
         
         return numberFormatter.string(from: NSNumber(integerLiteral: number))!
     }
     
-    
     // MARK: - Alerts
+    
     static var alertData: [[String]] = [
-        
         ["Name is missing",
          "Sorry, cannot proceed without a name. Please provide one. \n\nTips: use alphanumerics and (or) specials; length: 2 to 70 symbols."],
         
@@ -76,23 +74,28 @@ final class Helpers {
          "Please input some meaningful and descriptive name for your fresh category"],
         
         ["Category name cannot be empty!",
-         "Please consider adding some meaningful and descriptive name"]]
+         "Please consider adding some meaningful and descriptive name"]
+    ]
     
-    
-    static func createAlertController(with title: String, message: String, and style: UIAlertController.Style) -> UIAlertController {
-        
+    static func createAlertController(
+        with title: String,
+        message: String,
+        and style: UIAlertController.Style
+    ) -> UIAlertController
+    {
         let alertController = UIAlertController(
             title: title,
             message: message,
-            preferredStyle: style)
-        
+            preferredStyle: style
+        )
         let alertAction = UIAlertAction(
             title: "OK",
             style: .cancel,
             handler: { _ in
                 alertController.dismiss(
                     animated: true,
-                    completion: nil)
+                    completion: nil
+                )
         })
         
         alertController.addAction(alertAction)
@@ -100,13 +103,17 @@ final class Helpers {
         return alertController
     }
     
-    static func createInputAlertController(with title: String, message: String, and style: UIAlertController.Style) -> UIAlertController {
-        
+    static func createInputAlertController(
+        with title: String,
+        message: String,
+        and style: UIAlertController.Style
+    ) -> UIAlertController
+    {
         let alertController = UIAlertController(
             title: title,
             message: message,
-            preferredStyle: style)
-        
+            preferredStyle: style
+        )
         let submitAction = UIAlertAction(
             title: "Submit",
             style: .default,
@@ -117,26 +124,25 @@ final class Helpers {
                 )
                 DataManager.createEntry(category)
         })
-        
         let cancelAction = UIAlertAction(
             title: "Cancel",
             style: .cancel,
-            handler: nil)
-        
+            handler: nil
+        )
         
         alertController.addAction(cancelAction)
-        
         alertController.addAction(submitAction)
-        
         alertController.addTextField {
             $0.placeholder = "Category name here..."
             $0.addTarget(
                 alertController,
                 action: #selector(
-                    alertController.submitButtonDidEnabled),
-                for: .editingChanged)
+                    alertController.submitButtonDidEnabled
+                ),
+                for: .editingChanged
+            )
         }
-        
         return alertController
     }
+    
 }

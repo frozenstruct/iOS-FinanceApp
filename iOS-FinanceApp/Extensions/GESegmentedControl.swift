@@ -12,16 +12,14 @@ import UIKit
 extension UISegmentedControl {
     
     func setup(input: [String]) {
-        
         input.forEach {
-            
             var index = 0
             
             insertSegment(withTitle: $0, at: index, animated: true)
             
             index += 1
         }
-        
         selectedSegmentIndex = 0
     }
+    
 }

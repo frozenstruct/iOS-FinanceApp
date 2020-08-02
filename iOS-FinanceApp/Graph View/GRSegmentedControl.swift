@@ -14,41 +14,34 @@ class GRSegmentedControl: UISegmentedControl {
     
     @objc dynamic var segIndex: Int = 0
     
-    
     func constrain() {
-        
         if let superview = superview {
             
             let safeArea = superview.safeAreaLayoutGuide
             
-            
             translatesAutoresizingMaskIntoConstraints = false
-            
             
             let constraints = [
                 centerXAnchor.constraint(
-                    equalTo: superview.centerXAnchor),
-                
+                    equalTo: superview.centerXAnchor
+                ),
                 leadingAnchor.constraint(
                     equalTo: safeArea.leadingAnchor,
-                    constant: 20),
-                
+                    constant: 20
+                ),
                 trailingAnchor.constraint(
                     equalTo: safeArea.trailingAnchor,
-                    constant: -20),
-                
+                    constant: -20
+                ),
                 topAnchor.constraint(
                     equalTo: superview.safeAreaLayoutGuide.topAnchor)
-                
             ]
             
             constraints.forEach { $0.isActive = true }
         }
     }
     
-    
     override func didMoveToSuperview() {
-        
         setup(input: items)
         
         constrain()
@@ -56,19 +49,19 @@ class GRSegmentedControl: UISegmentedControl {
         addTarget(
             self,
             action: #selector(segmentTapped),
-            for: .valueChanged)
+            for: .valueChanged
+        )
     }
     
-    
     @objc func segmentTapped(_ sender: UISegmentedControl) {
-        
         let graphDataSource = GraphDataSource()
         
         switch sender.selectedSegmentIndex {
         case 0:
             graphDataSource.getTimeframeData(
                 timeFrame: .day,
-                cutOff: DateConstants.today)
+                cutOff: DateConstants.today
+            )
             
             segIndex = sender.selectedSegmentIndex
             
@@ -76,7 +69,8 @@ class GRSegmentedControl: UISegmentedControl {
         case 1:
             graphDataSource.getTimeframeData(
                 timeFrame: .week,
-                cutOff: DateConstants.weekFloor)
+                cutOff: DateConstants.weekFloor
+            )
             
             segIndex = sender.selectedSegmentIndex
             
@@ -84,7 +78,8 @@ class GRSegmentedControl: UISegmentedControl {
         case 2:
             graphDataSource.getTimeframeData(
                 timeFrame: .month,
-                cutOff: DateConstants.monthFloor)
+                cutOff: DateConstants.monthFloor
+            )
             
             segIndex = sender.selectedSegmentIndex
             
@@ -92,7 +87,8 @@ class GRSegmentedControl: UISegmentedControl {
         case 3:
             graphDataSource.getTimeframeData(
                 timeFrame: .year,
-                cutOff: DateConstants.yearFloor)
+                cutOff: DateConstants.yearFloor
+            )
             
             segIndex = sender.selectedSegmentIndex
             
@@ -104,9 +100,11 @@ class GRSegmentedControl: UISegmentedControl {
             print("\nGRSegemtedControl is now at \(segIndex) index.\n")
         }
     }
+    
 }
 
 enum GRSegmetedSelection {
     
     case day, week, month, year, all
+    
 }

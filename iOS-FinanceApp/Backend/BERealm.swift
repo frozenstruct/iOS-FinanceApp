@@ -8,6 +8,8 @@
 
 import RealmSwift
 
+// MARK: - Global Data Source
+
 var realm = try! Realm()
 
 var entries = realm.objects(Entry.self).sorted(byKeyPath: "date", ascending: false)

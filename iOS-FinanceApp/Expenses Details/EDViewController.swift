@@ -12,36 +12,34 @@ import RealmSwift
 class EDViewController: UIViewController {
     
     // MARK: - Outlets and Properties
-    @IBOutlet weak var detailsTableView: UITableView!
     
+    @IBOutlet weak var detailsTableView: UITableView!
+
     var entryDidSendToReview: Entry?
     
-    
     // MARK: - Lifecycle Methods
+    
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         setupTableView()
-        
         observe()
     }
-    
     
     deinit {
         notificationCenter.removeObserver(self)
     }
     
-    
     // MARK: - Actions
+    
     @IBAction func addCategory(_ sender: Any) {
-        
         let alert = Helpers
             .createInputAlertController(
                 with: Helpers
                     .alertData[10][0],
                 message: Helpers.alertData[10][1],
-                and: .alert)
+                and: .alert
+        )
         
         self.present(alert, animated: true, completion: nil)
         
@@ -49,12 +47,10 @@ class EDViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if segue.identifier == "Amend Entry Segue" {
-            
             let destinationController = segue.destination as! EIViewController
-            
             destinationController.incomingData = entryDidSendToReview
         }
     }
+    
 }

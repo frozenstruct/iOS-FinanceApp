@@ -12,9 +12,8 @@ import UIKit
 extension UILabel {
     
     func resizeToText() {
-        
         self.numberOfLines = 1
-        
         self.sizeToFit()
     }
+    
 }

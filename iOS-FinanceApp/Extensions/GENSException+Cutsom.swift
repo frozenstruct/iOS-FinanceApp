@@ -13,4 +13,5 @@ extension NSExceptionName {
     static var shouldNeverHappenException: NSExceptionName {
         return.init("com.exc.this.should.never.happen")
     }
+    
 }

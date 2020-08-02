@@ -11,8 +11,8 @@ import Foundation
 enum TimeFrame {
     
     case day, week, month, year, all
+    
 }
-
 
 struct DateConstants {
     
@@ -39,4 +39,5 @@ struct DateConstants {
             Calendar.current.date(from: Calendar.current.dateComponents([.year, .month, .day], from: today.addingTimeInterval(-365 * 24 * 60 * 60)))!
         }
     }
+    
 }

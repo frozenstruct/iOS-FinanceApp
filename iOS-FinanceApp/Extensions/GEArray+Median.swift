@@ -11,7 +11,6 @@ import Foundation
 extension Array where Element == Int {
     
     func median() -> Float {
-        
         guard !self.isEmpty else {
             return 0.00
         }
@@ -24,4 +23,5 @@ extension Array where Element == Int {
             return Float(sorted[(sorted.count - 1) / 2])
         }
     }
+    
 }

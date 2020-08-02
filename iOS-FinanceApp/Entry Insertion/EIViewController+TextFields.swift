@@ -12,25 +12,21 @@ import UIKit
 extension EIViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         if textField.returnKeyType == .next {
             amntInputTextField.becomeFirstResponder()
         }
         return false
     }
     
-    
     func flushTextFields() {
-        
         for view in self.view.subviews {
-            
             if let textField = view as? UITextField {
                 textField.text = ""
-                
+            } else {
+                return
             }
         }
     }
-    
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         switch textField.tag {
@@ -40,7 +36,7 @@ extension EIViewController: UITextFieldDelegate {
             !pickerData.isEmpty ? textField.text = "\(pickerData[categoryPicker.selectedRow(inComponent: 0)])" : nil
         default: break
         }
-        
         return true
     }
+    
 }

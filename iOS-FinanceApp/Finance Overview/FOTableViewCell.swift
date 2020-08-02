@@ -11,14 +11,11 @@ import UIKit
 class FOTableViewCell: UITableViewCell {
     
     @IBOutlet weak var categoryNameLabel: UILabel!
-    
     @IBOutlet weak var categoryAmountLabel: UILabel!
     
-    
     func updateOverviewCell(with data: [CategoryTotal], at indexPath: IndexPath) {
-        
         categoryNameLabel.text = data[indexPath.row].name
-        
         categoryAmountLabel.text = "\(Helpers.createNumberFormatter(input: data[indexPath.row].balance))"
     }
+    
 }

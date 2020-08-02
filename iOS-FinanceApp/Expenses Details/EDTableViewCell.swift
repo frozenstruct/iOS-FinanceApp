@@ -8,27 +8,21 @@
 import UIKit
 
 class EDTableViewCell: UITableViewCell {
+    
     @IBOutlet weak var nameLabel: UILabel!
-    
     @IBOutlet weak var amountLabel: UILabel!
-    
     @IBOutlet weak var categoryLabel: UILabel!
-    
     @IBOutlet weak var dateLabel: UILabel!
     
-    
     func updateDetailsCell(with data: Entry) {
-        
         nameLabel.text = data.name
-        
         amountLabel.text = "\(Helpers.createNumberFormatter(input: data.amount))"
-        
         categoryLabel.text = data.category
-        
         dateLabel.text = Helpers
             .createDateFormatter(
                 dateStyle: .medium,
-                timeStyle: .none)
-            .string(from: data.date!)
+                timeStyle: .none
+        ).string(from: data.date!)
     }
+    
 }
