@@ -56,7 +56,7 @@ extension EDViewController: UITableViewDataSource {
         
         cell.updateDetailsCell(with: entries[indexPath.row])
         
-        cell.accessoryType = .detailDisclosureButton
+        cell.accessoryType = .detailButton
         
         return cell
     }
