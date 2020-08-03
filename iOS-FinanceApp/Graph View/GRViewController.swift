@@ -12,9 +12,7 @@ import RealmSwift
 class GRViewController: UIViewController, Observer {
     
     let segmentedControl = GRSegmentedControl()
-    
     let lineGraphView = GRLineView()
-    
     let entryTypeToggle = GREntryTypeToggle()
     
     var transmittedData: Transmittable? = nil

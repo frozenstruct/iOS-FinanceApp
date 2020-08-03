@@ -38,4 +38,5 @@ class GREntryTypeToggle: UISegmentedControl {
             constraints.forEach({ $0.isActive = true })
         }
     }
+    
 }

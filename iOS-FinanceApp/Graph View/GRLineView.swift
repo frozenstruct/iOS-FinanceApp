@@ -190,34 +190,7 @@ class GRLineView: UIView {
         backgroundColor = .clear
     }
     
-    
-    func constrainSelf() {
-        translatesAutoresizingMaskIntoConstraints = false
-        
-        if let superview = superview {
-            let safeArea = superview.safeAreaLayoutGuide
-            
-            let constraints = [
-                centerXAnchor.constraint(
-                    equalTo: superview.centerXAnchor
-                ),
-                leadingAnchor.constraint(
-                    equalTo: safeArea.leadingAnchor,
-                    constant: 20
-                ),
-                trailingAnchor.constraint(
-                    equalTo: safeArea.trailingAnchor,
-                    constant: -20
-                ),
-                heightAnchor.constraint(
-                    equalToConstant: 250
-                )
-            ]
-            
-            constraints.forEach { $0.isActive = true }
-        }
-    }
-    
+    // MARK: - Elements
     
     func addLabels() {
         titleLabel = UILabel(
@@ -308,7 +281,6 @@ class GRLineView: UIView {
         self.addSubview(minLabel)
     }
     
-    
     func setupLabel(inputLabel: UILabel, labelText: String, fontString: String, fontSize: CGFloat) {
         inputLabel.text = "\(labelText)"
         inputLabel.font = UIFont(
@@ -318,65 +290,6 @@ class GRLineView: UIView {
         inputLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         inputLabel.font = inputLabel.font.withSize(fontSize)
         inputLabel.resizeToText()
-    }
-    
-    func constrainLabels() {
-        titleLabel
-            .translatesAutoresizingMaskIntoConstraints = false
-        totalLabel
-            .translatesAutoresizingMaskIntoConstraints = false
-        maxLabel
-            .translatesAutoresizingMaskIntoConstraints = false
-        medLabel
-            .translatesAutoresizingMaskIntoConstraints = false
-        minLabel
-            .translatesAutoresizingMaskIntoConstraints = false
-        
-        let safeArea = safeAreaLayoutGuide
-        
-        let constraints = [
-            titleLabel.topAnchor.constraint(
-                equalTo: safeArea.topAnchor,
-                constant: 6
-            ),
-            titleLabel.leadingAnchor.constraint(
-                equalTo: safeArea.leadingAnchor,
-                constant: 8
-            ),
-            totalLabel.topAnchor.constraint(
-                equalTo: titleLabel.bottomAnchor
-            ),
-            totalLabel.leadingAnchor.constraint(
-                equalTo: safeArea.leadingAnchor,
-                constant: 8
-            ),
-            maxLabel.topAnchor.constraint(
-                equalTo: totalLabel.bottomAnchor,
-                constant: 7.61
-            ),
-            maxLabel.leadingAnchor.constraint(
-                equalTo: safeArea.leadingAnchor,
-                constant: 8
-            ),
-            medLabel.topAnchor.constraint(
-                equalTo: maxLabel.bottomAnchor,
-                constant: 48
-            ),
-            medLabel.leadingAnchor.constraint(
-                equalTo: safeArea.leadingAnchor,
-                constant: 8
-            ),
-            minLabel.topAnchor.constraint(
-                equalTo: medLabel.bottomAnchor,
-                constant: 46
-            ),
-            minLabel.leadingAnchor.constraint(
-                equalTo: safeArea.leadingAnchor,
-                constant: 8
-            ),
-        ]
-        
-        constraints.forEach({ $0.isActive = true })
     }
     
     func setupStackView() {
@@ -393,22 +306,20 @@ class GRLineView: UIView {
     }
 }
 
-extension GRLineView {
+// MARK: - Dimension Constants
+
+private struct Constants {
     
-    private struct Constants {
-        
-        static let viewWidth: CGFloat = 300.0
-        static let viewHeight: CGFloat = 250.0
-        
-        static let cornerRadius = CGSize(width: 8.0, height: 8.0)
-        
-        static let margin: CGFloat = 30.0
-        
-        static let topBorder: CGFloat = 60.0
-        static let bottomBorder: CGFloat = 60.0
-        
-        static let circleDiameter: CGFloat = 5.0
-        
-    }
+    static let viewWidth: CGFloat = 300.0
+    static let viewHeight: CGFloat = 250.0
+    
+    static let cornerRadius = CGSize(width: 8.0, height: 8.0)
+    static let circleDiameter: CGFloat = 5.0
+    static let margin: CGFloat = 30.0
+    
+    static let topBorder: CGFloat = 60.0
+    static let bottomBorder: CGFloat = 60.0
     
 }
+
+

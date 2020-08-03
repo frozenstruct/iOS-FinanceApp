@@ -72,7 +72,6 @@ class GRStackView: UIStackView {
         arrangedSubviewsCount = arrangedSubviews.count
     }
     
-    
     func constrainSelf() {
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -94,4 +93,5 @@ class GRStackView: UIStackView {
         
         constraints.forEach { $0.isActive = true }
     }
+    
 }
